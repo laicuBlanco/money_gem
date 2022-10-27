@@ -12,3 +12,5 @@ gem "rspec", "~> 3.0"
 gem "rubocop", "~> 1.21"
 
 gem 'pry', '~> 0.13.1'
+
+gem 'webmock', '~> 3.14'

@@ -45,8 +45,6 @@ class Money
   # - and the method should return that 
 
   CURRENCIES.each do |curr|
-    
-
 	  define_method("to_#{curr}") do
 			original_object = self
       currency_to_convert_to = curr

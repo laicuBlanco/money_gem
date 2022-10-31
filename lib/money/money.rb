@@ -13,12 +13,20 @@ require 'money/services/get_currency_conversion'
 class Money 
 
   CURRENCIES = ["USD","GBP", "USD", "EUR", "CHF", "PLN"].freeze
+  DEFAULT_CURRENCY = "USD".freeze
+  class UnsupportedType < StandardError; end
 
   attr_reader :money, :currency
 
   def initialize(money:nil, currency: nil)
     @money = money.to_f.round(2)
     @currency = currency
+  end
+
+  def self.using_default_currency
+    money = yield
+    raise UnsupportedType unless money.is_a?(Integer) || money.is_a?(Float)
+    Money(money, DEFAULT_CURRENCY)
   end
 
   def exchange_to(to_currency)

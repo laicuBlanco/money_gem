@@ -39,11 +39,6 @@ class Money
   	end
   end
 
-  # - we need the original object (here we have the original currency and the amount)
-  # - we need the currency to convert to 
-  # - we need to initialize a new object with the converted values
-  # - and the method should return that 
-
   CURRENCIES.each do |curr|
 	  define_method("to_#{curr}") do
 			original_object = self
@@ -64,7 +59,8 @@ class Money
   end
 
   def respond_to_missing?(method_name, include_private = false)
-    curr = method_name.gsub("to_", "")
+    method_name_string = method_name.to_s
+    curr = method_name_string.gsub("to_", "")
     CURRENCIES.include?(curr)
   end
 end
